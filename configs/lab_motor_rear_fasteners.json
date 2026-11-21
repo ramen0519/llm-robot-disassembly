@@ -1,0 +1,14 @@
+{
+  "schema": "bolted_joint/v1",
+  "joint_id": "02500_rear_housing",
+  "source_step_sha256": "924ea507d79d818414770878390216bd7b9644fc973ed3ac2147822f09ace1d1",
+  "retained": {"id": "frame", "path": "#58087/#21985/#8744", "label": "02004_Frame"},
+  "removable": {"id": "housing", "path": "#58087/#56568", "label": "02008_Housing.1"},
+  "bom_bolt_group": {"parent_path": "#58087", "product": "M5×L15"},
+  "bolts": [
+    {"id": "m5_1", "path": "#58087/#58029", "label": "M5×L15.1"},
+    {"id": "m5_2", "path": "#58087/#58044", "label": "M5×L15.2"},
+    {"id": "m5_3", "path": "#58087/#58059", "label": "M5×L15.3"},
+    {"id": "m5_4", "path": "#58087/#58074", "label": "M5×L15.4"}
+  ]
+}

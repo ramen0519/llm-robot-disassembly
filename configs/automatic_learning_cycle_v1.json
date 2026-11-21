@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "purpose": "bounded functional learning cycle; both tasks are development, not held-out evaluation",
+  "max_proposals": 3,
+  "admission_manifest": "configs/skill_discovery_cases_v1.json",
+  "initial_memory": null,
+  "initial_library": null,
+  "source": {
+    "assembly_dir": "/opt/asap-research/ASAP/assets/beam_assembly/original",
+    "base_part": "6", "seed": 0, "budget": 12, "state_action_budget": 12,
+    "max_gripper": 3, "max_pose": 3, "timeout": 180, "wall_timeout": 240,
+    "response_timeout": 60
+  },
+  "target": {
+    "assembly_dir": "/opt/asap-research/prototype_completion_20261018/07009",
+    "base_part": "none", "seed": 0, "budget": 12, "state_action_budget": 12,
+    "max_gripper": 3, "max_pose": 3, "timeout": 180, "wall_timeout": 240,
+    "response_timeout": 60
+  }
+}

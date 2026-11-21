@@ -1,0 +1,273 @@
+test_author_code_and_candidate_status_are_not_promoted (tests.test_relational_knowledge.RelationalKnowledgeTests.test_author_code_and_candidate_status_are_not_promoted) ... ok
+test_forbidden_drive_rejected_before_any_filesystem_probe (tests.test_relational_knowledge.RelationalKnowledgeTests.test_forbidden_drive_rejected_before_any_filesystem_probe) ... ok
+test_hash_mismatch_and_unresolved_link_are_rejected (tests.test_relational_knowledge.RelationalKnowledgeTests.test_hash_mismatch_and_unresolved_link_are_rejected) ... ok
+test_junction_parent_is_checked_before_its_child (tests.test_relational_knowledge.RelationalKnowledgeTests.test_junction_parent_is_checked_before_its_child) ... ok
+test_library_is_not_skill_execution_authority (tests.test_relational_knowledge.RelationalKnowledgeTests.test_library_is_not_skill_execution_authority) ... ok
+test_missing_contact_data_is_not_empty_contact_graph (tests.test_relational_knowledge.RelationalKnowledgeTests.test_missing_contact_data_is_not_empty_contact_graph) ... ok
+test_partial_state_filters_reference_graph_without_dynamic_claim (tests.test_relational_knowledge.RelationalKnowledgeTests.test_partial_state_filters_reference_graph_without_dynamic_claim) ... ok
+test_registry_wrapper_keeps_python_and_author (tests.test_relational_knowledge.RelationalKnowledgeTests.test_registry_wrapper_keeps_python_and_author) ... ok
+test_relative_centers_and_contacts_preserve_unknown_causes (tests.test_relational_knowledge.RelationalKnowledgeTests.test_relative_centers_and_contacts_preserve_unknown_causes) ... ok
+test_unit_and_invalid_geometry_not_invented (tests.test_relational_knowledge.RelationalKnowledgeTests.test_unit_and_invalid_geometry_not_invented) ... ok
+test_allowed_cards_applies_to_resolved_evidence (tests.test_relational_retrieval.RelationalRetrievalTests.test_allowed_cards_applies_to_resolved_evidence) ... ok
+test_axis_permutation_and_known_unit_conversion (tests.test_relational_retrieval.RelationalRetrievalTests.test_axis_permutation_and_known_unit_conversion) ... ok
+test_base_id_equality_not_required_or_used (tests.test_relational_retrieval.RelationalRetrievalTests.test_base_id_equality_not_required_or_used) ... ok
+test_condition_mismatch_visible_but_does_not_prune_experience (tests.test_relational_retrieval.RelationalRetrievalTests.test_condition_mismatch_visible_but_does_not_prune_experience) ... ok
+test_cycles_broken_and_missing_links_not_invented (tests.test_relational_retrieval.RelationalRetrievalTests.test_cycles_broken_and_missing_links_not_invented) ... ok
+test_distinct_steps_share_evidence_count_but_keep_their_contexts (tests.test_relational_retrieval.RelationalRetrievalTests.test_distinct_steps_share_evidence_count_but_keep_their_contexts) ... ok
+test_diversity_does_not_drop_later_states_or_promote_fixture (tests.test_relational_retrieval.RelationalRetrievalTests.test_diversity_does_not_drop_later_states_or_promote_fixture) ... ok
+test_empty_conditions_and_numeric_labels_do_not_match (tests.test_relational_retrieval.RelationalRetrievalTests.test_empty_conditions_and_numeric_labels_do_not_match) ... ok
+test_excluded_product_cannot_reenter_through_skill_evidence (tests.test_relational_retrieval.RelationalRetrievalTests.test_excluded_product_cannot_reenter_through_skill_evidence) ... ok
+test_explicit_no_base_is_different_from_unknown_and_fixed_base (tests.test_relational_retrieval.RelationalRetrievalTests.test_explicit_no_base_is_different_from_unknown_and_fixed_base) ... ok
+test_input_immutable_and_result_independent (tests.test_relational_retrieval.RelationalRetrievalTests.test_input_immutable_and_result_independent) ... ok
+test_keyword_search_does_not_scan_raw_ids_or_source_code (tests.test_relational_retrieval.RelationalRetrievalTests.test_keyword_search_does_not_scan_raw_ids_or_source_code) ... ok
+test_mixed_evidence_lesson_is_excluded_as_a_whole (tests.test_relational_retrieval.RelationalRetrievalTests.test_mixed_evidence_lesson_is_excluded_as_a_whole) ... ok
+test_model_can_change_search_channels_without_losing_condition_differences (tests.test_relational_retrieval.RelationalRetrievalTests.test_model_can_change_search_channels_without_losing_condition_differences) ... ok
+test_more_citations_do_not_inflate_score (tests.test_relational_retrieval.RelationalRetrievalTests.test_more_citations_do_not_inflate_score) ... ok
+test_null_is_not_a_condition_or_numeric_match (tests.test_relational_retrieval.RelationalRetrievalTests.test_null_is_not_a_condition_or_numeric_match) ... ok
+test_numeric_tie_scores_do_not_depend_on_ids_or_outcome (tests.test_relational_retrieval.RelationalRetrievalTests.test_numeric_tie_scores_do_not_depend_on_ids_or_outcome) ... ok
+test_pagination_and_invalid_contract (tests.test_relational_retrieval.RelationalRetrievalTests.test_pagination_and_invalid_contract) ... ok
+test_shape_relation_match_without_part_count_or_ids (tests.test_relational_retrieval.RelationalRetrievalTests.test_shape_relation_match_without_part_count_or_ids) ... ok
+test_source_family_not_three_independent_observations (tests.test_relational_retrieval.RelationalRetrievalTests.test_source_family_not_three_independent_observations) ... ok
+test_success_and_failure_from_same_part_are_preserved (tests.test_relational_retrieval.RelationalRetrievalTests.test_success_and_failure_from_same_part_are_preserved) ... ok
+test_unknown_units_do_not_make_absolute_size_match (tests.test_relational_retrieval.RelationalRetrievalTests.test_unknown_units_do_not_make_absolute_size_match) ... ok
+test_conflicting_versions_are_not_arbitrarily_joined (tests.test_relational_migration.RelationalMigrationTests.test_conflicting_versions_are_not_arbitrarily_joined) ... ok
+test_constraint_scope_preserves_target_and_state (tests.test_relational_migration.RelationalMigrationTests.test_constraint_scope_preserves_target_and_state) ... ok
+test_equivalent_pagination_versions_keep_all_origins (tests.test_relational_migration.RelationalMigrationTests.test_equivalent_pagination_versions_keep_all_origins) ... ok
+test_legacy_removed_part_is_not_restored_to_query (tests.test_relational_migration.RelationalMigrationTests.test_legacy_removed_part_is_not_restored_to_query) ... ok
+test_native_acceptance_and_deadline_are_not_dropped (tests.test_relational_migration.RelationalMigrationTests.test_native_acceptance_and_deadline_are_not_dropped) ... ok
+test_model_search_read_then_plan_receives_reference_skill_without_execution (tests.test_relational_runtime.RelationalAgentToolsTests.test_model_search_read_then_plan_receives_reference_skill_without_execution) ... ERROR
+test_search_has_conditions_and_shape_not_only_card_id (tests.test_relational_runtime.RelationalAgentToolsTests.test_search_has_conditions_and_shape_not_only_card_id) ... ERROR
+test_actual_physics_pass_does_not_erase_rejected_transition_or_deadline (tests.test_relational_runtime.RelationalRuntimeTests.test_actual_physics_pass_does_not_erase_rejected_transition_or_deadline) ... ok
+test_actual_provider_body_contains_cards_and_separate_citations (tests.test_relational_runtime.RelationalRuntimeTests.test_actual_provider_body_contains_cards_and_separate_citations) ... ERROR
+test_all_current_candidate_contexts_in_audit (tests.test_relational_runtime.RelationalRuntimeTests.test_all_current_candidate_contexts_in_audit) ... ok
+test_bad_relational_citation_fails_closed (tests.test_relational_runtime.RelationalRuntimeTests.test_bad_relational_citation_fails_closed) ... ERROR
+test_candidate_skill_not_executable_and_source_immutable (tests.test_relational_runtime.RelationalRuntimeTests.test_candidate_skill_not_executable_and_source_immutable) ... ERROR
+test_cli_keeps_legacy_default_and_exposes_opt_in (tests.test_relational_runtime.RelationalRuntimeTests.test_cli_keeps_legacy_default_and_exposes_opt_in) ... ok
+test_current_product_excludes_derived_lesson_and_skill (tests.test_relational_runtime.RelationalRuntimeTests.test_current_product_excludes_derived_lesson_and_skill) ... ok
+test_fixture_mode_still_runs_with_zero_model_calls (tests.test_relational_runtime.RelationalRuntimeTests.test_fixture_mode_still_runs_with_zero_model_calls) ... ERROR
+test_hidden_priors_withheld_only_in_provider_projection (tests.test_relational_runtime.RelationalRuntimeTests.test_hidden_priors_withheld_only_in_provider_projection) ... ERROR
+test_model_channel_query_is_forwarded_without_fallback (tests.test_relational_runtime.RelationalRuntimeTests.test_model_channel_query_is_forwarded_without_fallback) ... ok
+test_no_fixed_base_is_known_absence_not_missing_information (tests.test_relational_runtime.RelationalRuntimeTests.test_no_fixed_base_is_known_absence_not_missing_information) ... ok
+test_read_includes_real_context_and_linked_evidence (tests.test_relational_runtime.RelationalRuntimeTests.test_read_includes_real_context_and_linked_evidence) ... ok
+test_unknown_fixture_or_nontraining_and_derived_cards_never_transmitted (tests.test_relational_runtime.RelationalRuntimeTests.test_unknown_fixture_or_nontraining_and_derived_cards_never_transmitted) ... ok
+test_unknown_or_oversize_read_is_not_success (tests.test_relational_runtime.RelationalRuntimeTests.test_unknown_or_oversize_read_is_not_success) ... ok
+test_fixture_durable_limit_and_provenance (tests.test_scored_order_skill.ScoredOrderSkillTests.test_fixture_durable_limit_and_provenance) ... ERROR
+test_id_independent_numeric_program_and_complete_ties (tests.test_scored_order_skill.ScoredOrderSkillTests.test_id_independent_numeric_program_and_complete_ties) ... ok
+test_invalid_source_and_output_retained_not_accepted (tests.test_scored_order_skill.ScoredOrderSkillTests.test_invalid_source_and_output_retained_not_accepted) ... ERROR
+test_no_io_no_part_ids_no_shapes_leak (tests.test_scored_order_skill.ScoredOrderSkillTests.test_no_io_no_part_ids_no_shapes_leak) ... ok
+test_one_shot_host_recovers_ledger_and_rejects_tampered_local_source (tests.test_scored_order_skill.ScoredOrderSkillTests.test_one_shot_host_recovers_ledger_and_rejects_tampered_local_source) ... ERROR
+test_preview_size_limits_and_generator_has_no_rule_or_example_program (tests.test_scored_order_skill.ScoredOrderSkillTests.test_preview_size_limits_and_generator_has_no_rule_or_example_program) ... ok
+
+======================================================================
+ERROR: test_model_search_read_then_plan_receives_reference_skill_without_execution (tests.test_relational_runtime.RelationalAgentToolsTests.test_model_search_read_then_plan_receives_reference_skill_without_execution)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "PUBLIC_CHECKOUT\tests\test_relational_runtime.py", line 195, in setUp
+    self.fixture.setUp()
+  File "PUBLIC_CHECKOUT\tests\test_agent_knowledge.py", line 38, in setUp
+    self.fixture.setUp()
+  File "PUBLIC_CHECKOUT\tests\test_knowledge_context.py", line 39, in setUp
+    registry = SkillRegistry(self.root/"registry", True, fixture=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\skill_registry.py", line 111, in __init__
+    self.root = _safe_path(root, allow_test_root)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\worker\task_memory.py", line 82, in _safe_path
+    path = Path(_lexical_path(value)).absolute()
+                ^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\worker\task_memory.py", line 62, in _lexical_path
+    raise ValueError("memory paths must exclude non-C drives and traversal")
+ValueError: memory paths must exclude non-C drives and traversal
+
+======================================================================
+ERROR: test_search_has_conditions_and_shape_not_only_card_id (tests.test_relational_runtime.RelationalAgentToolsTests.test_search_has_conditions_and_shape_not_only_card_id)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "PUBLIC_CHECKOUT\tests\test_relational_runtime.py", line 195, in setUp
+    self.fixture.setUp()
+  File "PUBLIC_CHECKOUT\tests\test_agent_knowledge.py", line 38, in setUp
+    self.fixture.setUp()
+  File "PUBLIC_CHECKOUT\tests\test_knowledge_context.py", line 39, in setUp
+    registry = SkillRegistry(self.root/"registry", True, fixture=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\skill_registry.py", line 111, in __init__
+    self.root = _safe_path(root, allow_test_root)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\worker\task_memory.py", line 82, in _safe_path
+    path = Path(_lexical_path(value)).absolute()
+                ^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\worker\task_memory.py", line 62, in _lexical_path
+    raise ValueError("memory paths must exclude non-C drives and traversal")
+ValueError: memory paths must exclude non-C drives and traversal
+
+======================================================================
+ERROR: test_actual_provider_body_contains_cards_and_separate_citations (tests.test_relational_runtime.RelationalRuntimeTests.test_actual_provider_body_contains_cards_and_separate_citations)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "PUBLIC_CHECKOUT\tests\test_relational_runtime.py", line 67, in test_actual_provider_body_contains_cards_and_separate_citations
+    service = self.service(transport)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\tests\test_relational_runtime.py", line 57, in service
+    return SequenceRankService(config(), Path(self.temp.name)/'ledger.sqlite',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\sequence_ranker.py", line 116, in __init__
+    super().__init__(config, ledger_path, transport)
+  File "PUBLIC_CHECKOUT\orchestrator\llm_ranker.py", line 119, in __init__
+    self.ledger_path = _guard_path(ledger_path)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\llm_ranker.py", line 83, in _guard_path
+    return guard_ledger_path(value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\batch_budget.py", line 26, in guard_ledger_path
+    raise ValueError("ledger_drive_not_allowed")
+ValueError: ledger_drive_not_allowed
+
+======================================================================
+ERROR: test_bad_relational_citation_fails_closed (tests.test_relational_runtime.RelationalRuntimeTests.test_bad_relational_citation_fails_closed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "PUBLIC_CHECKOUT\tests\test_relational_runtime.py", line 175, in test_bad_relational_citation_fails_closed
+    service = self.service(lambda u,h,b,t: raw(b, relational_card_ids=['invented']))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\tests\test_relational_runtime.py", line 57, in service
+    return SequenceRankService(config(), Path(self.temp.name)/'ledger.sqlite',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\sequence_ranker.py", line 116, in __init__
+    super().__init__(config, ledger_path, transport)
+  File "PUBLIC_CHECKOUT\orchestrator\llm_ranker.py", line 119, in __init__
+    self.ledger_path = _guard_path(ledger_path)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\llm_ranker.py", line 83, in _guard_path
+    return guard_ledger_path(value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\batch_budget.py", line 26, in guard_ledger_path
+    raise ValueError("ledger_drive_not_allowed")
+ValueError: ledger_drive_not_allowed
+
+======================================================================
+ERROR: test_candidate_skill_not_executable_and_source_immutable (tests.test_relational_runtime.RelationalRuntimeTests.test_candidate_skill_not_executable_and_source_immutable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "PUBLIC_CHECKOUT\tests\test_relational_runtime.py", line 87, in test_candidate_skill_not_executable_and_source_immutable
+    service = self.service(source=source)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\tests\test_relational_runtime.py", line 57, in service
+    return SequenceRankService(config(), Path(self.temp.name)/'ledger.sqlite',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\sequence_ranker.py", line 116, in __init__
+    super().__init__(config, ledger_path, transport)
+  File "PUBLIC_CHECKOUT\orchestrator\llm_ranker.py", line 119, in __init__
+    self.ledger_path = _guard_path(ledger_path)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\llm_ranker.py", line 83, in _guard_path
+    return guard_ledger_path(value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\batch_budget.py", line 26, in guard_ledger_path
+    raise ValueError("ledger_drive_not_allowed")
+ValueError: ledger_drive_not_allowed
+
+======================================================================
+ERROR: test_fixture_mode_still_runs_with_zero_model_calls (tests.test_relational_runtime.RelationalRuntimeTests.test_fixture_mode_still_runs_with_zero_model_calls)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "PUBLIC_CHECKOUT\tests\test_relational_runtime.py", line 168, in test_fixture_mode_still_runs_with_zero_model_calls
+    service = SequenceRankService(cfg, Path(self.temp.name)/'fixture.sqlite',
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\sequence_ranker.py", line 116, in __init__
+    super().__init__(config, ledger_path, transport)
+  File "PUBLIC_CHECKOUT\orchestrator\llm_ranker.py", line 119, in __init__
+    self.ledger_path = _guard_path(ledger_path)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\llm_ranker.py", line 83, in _guard_path
+    return guard_ledger_path(value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\batch_budget.py", line 26, in guard_ledger_path
+    raise ValueError("ledger_drive_not_allowed")
+ValueError: ledger_drive_not_allowed
+
+======================================================================
+ERROR: test_hidden_priors_withheld_only_in_provider_projection (tests.test_relational_runtime.RelationalRuntimeTests.test_hidden_priors_withheld_only_in_provider_projection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "PUBLIC_CHECKOUT\tests\test_relational_runtime.py", line 130, in test_hidden_priors_withheld_only_in_provider_projection
+    self.service(source=source).prepare(envelope())
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\tests\test_relational_runtime.py", line 57, in service
+    return SequenceRankService(config(), Path(self.temp.name)/'ledger.sqlite',
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\sequence_ranker.py", line 116, in __init__
+    super().__init__(config, ledger_path, transport)
+  File "PUBLIC_CHECKOUT\orchestrator\llm_ranker.py", line 119, in __init__
+    self.ledger_path = _guard_path(ledger_path)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\llm_ranker.py", line 83, in _guard_path
+    return guard_ledger_path(value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\batch_budget.py", line 26, in guard_ledger_path
+    raise ValueError("ledger_drive_not_allowed")
+ValueError: ledger_drive_not_allowed
+
+======================================================================
+ERROR: test_fixture_durable_limit_and_provenance (tests.test_scored_order_skill.ScoredOrderSkillTests.test_fixture_durable_limit_and_provenance)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "PUBLIC_CHECKOUT\tests\test_scored_order_skill.py", line 72, in test_fixture_durable_limit_and_provenance
+    s=GenerationService(packet(),dest,transport)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\scored_order_generation.py", line 144, in __init__
+    super().__init__(CONFIG, ledger_path, transport)
+  File "PUBLIC_CHECKOUT\orchestrator\llm_ranker.py", line 119, in __init__
+    self.ledger_path = _guard_path(ledger_path)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\llm_ranker.py", line 83, in _guard_path
+    return guard_ledger_path(value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\batch_budget.py", line 26, in guard_ledger_path
+    raise ValueError("ledger_drive_not_allowed")
+ValueError: ledger_drive_not_allowed
+
+======================================================================
+ERROR: test_invalid_source_and_output_retained_not_accepted (tests.test_scored_order_skill.ScoredOrderSkillTests.test_invalid_source_and_output_retained_not_accepted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "PUBLIC_CHECKOUT\tests\test_scored_order_skill.py", line 89, in test_invalid_source_and_output_retained_not_accepted
+    s=GenerationService(packet(),Path(temp)/'ledger.sqlite',Mock(return_value=provider(code)))
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\scored_order_generation.py", line 144, in __init__
+    super().__init__(CONFIG, ledger_path, transport)
+  File "PUBLIC_CHECKOUT\orchestrator\llm_ranker.py", line 119, in __init__
+    self.ledger_path = _guard_path(ledger_path)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\llm_ranker.py", line 83, in _guard_path
+    return guard_ledger_path(value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\batch_budget.py", line 26, in guard_ledger_path
+    raise ValueError("ledger_drive_not_allowed")
+ValueError: ledger_drive_not_allowed
+
+======================================================================
+ERROR: test_one_shot_host_recovers_ledger_and_rejects_tampered_local_source (tests.test_scored_order_skill.ScoredOrderSkillTests.test_one_shot_host_recovers_ledger_and_rejects_tampered_local_source)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "PUBLIC_CHECKOUT\tests\test_scored_order_skill.py", line 108, in test_one_shot_host_recovers_ledger_and_rejects_tampered_local_source
+    self.assertEqual(generate(run,True)['status'],'CANDIDATE')
+                     ^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\scored_order_generation.py", line 252, in generate
+    service=GenerationService(packet,path/'ledger.sqlite')
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\scored_order_generation.py", line 144, in __init__
+    super().__init__(CONFIG, ledger_path, transport)
+  File "PUBLIC_CHECKOUT\orchestrator\llm_ranker.py", line 119, in __init__
+    self.ledger_path = _guard_path(ledger_path)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\llm_ranker.py", line 83, in _guard_path
+    return guard_ledger_path(value)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "PUBLIC_CHECKOUT\orchestrator\batch_budget.py", line 26, in guard_ledger_path
+    raise ValueError("ledger_drive_not_allowed")
+ValueError: ledger_drive_not_allowed
+
+----------------------------------------------------------------------
+Ran 59 tests in 4.595s
+
+FAILED (errors=10)

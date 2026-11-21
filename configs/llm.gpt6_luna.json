@@ -1,0 +1,13 @@
+{
+  "enabled": false,
+  "model": "gpt-6-luna",
+  "base_url": "https://api.openai.com/v1",
+  "api_key_env": "OPENAI_API_KEY",
+  "max_calls": 0,
+  "max_usd": 0,
+  "input_usd_per_million": null,
+  "output_usd_per_million": null,
+  "max_output_tokens": 256,
+  "reasoning_effort": "none",
+  "request_overhead_tokens": 2048
+}

@@ -1,0 +1,3 @@
+[submodule "external/ASAP"]
+	path = external/ASAP
+	url = https://github.com/yunshengtian/ASAP.git

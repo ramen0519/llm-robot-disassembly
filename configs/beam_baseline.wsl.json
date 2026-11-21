@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "distro": "ASAP-Ubuntu",
+  "user": "root",
+  "asap_root": "/opt/asap-research/ASAP",
+  "python": "/opt/asap-research/envs/asap/bin/python",
+  "project_wsl": "/mnt/c/dev/disassembly_codex_ready_v2",
+  "expected_commit": "3727e716b57e0b508c4e9ecd9fefa6953e8f72da",
+  "native_defaults": {"seed": 0, "budget": 400, "max_pose": 3, "pose_reuse": 0, "num_proc": 1, "timeout": null},
+  "extensions_enabled": false
+}

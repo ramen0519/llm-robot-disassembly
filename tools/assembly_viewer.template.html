@@ -1,0 +1,166 @@
+<div id="assembly-__ASSEMBLY_ID__">
+  <h3>__ASSEMBLY_ID__ · __PART_COUNT__개 부품</h3>
+  <div class="viz-row" data-controls>
+    <button class="btn" type="button" data-original>조립 상태</button>
+    <button class="btn" type="button" data-angle>시점 바꾸기</button>
+    <button class="btn btn-primary" type="button" data-play hidden>분해 재생</button>
+  </div>
+  <div class="stage" role="img" aria-label="공식 ASAP OBJ 조립체의 회전 가능한 3D 보기">
+    <canvas aria-label="3D 조립체"></canvas>
+    <div class="labels" aria-hidden="true"></div>
+  </div>
+  <div class="text-small text-muted">드래그로 회전 · 부품 체크로 표시/숨김</div>
+  <div class="viz-row" data-legend aria-label="부품 표시"></div>
+  <div class="viz-controls">
+    <label class="form-label">확대 <input class="form-range" data-zoom type="range" min="70" max="190" value="100" aria-label="확대 비율"></label>
+  </div>
+  <div data-replay hidden>
+    <div class="viz-row">
+      <button class="btn" type="button" data-prev>이전 단계</button>
+      <button class="btn" type="button" data-next>다음 단계</button>
+      <span data-status class="tabular-nums" aria-live="polite">조립 상태</span>
+    </div>
+    <label class="form-label">분해 진행 <input class="form-range" data-progress type="range" min="0" max="320" value="0" aria-label="분해 진행 위치"></label>
+    <div class="text-small text-muted" data-detail></div>
+  </div>
+  <div data-error role="alert"></div>
+</div>
+<style>
+  #assembly-__ASSEMBLY_ID__ .stage {position:relative; width:100%; height:360px; touch-action:none; overflow:hidden;}
+  #assembly-__ASSEMBLY_ID__ canvas {display:block; width:100%; height:100%;}
+  #assembly-__ASSEMBLY_ID__ .labels {position:absolute;inset:0;pointer-events:none;}
+  #assembly-__ASSEMBLY_ID__ .part-label {position:absolute;color:var(--foreground);text-shadow:0 0 4px var(--background);font-weight:500;}
+  #assembly-__ASSEMBLY_ID__ .swatch {display:inline-block;width:10px;height:10px;}
+  @media(max-width:440px) {#assembly-__ASSEMBLY_ID__ .stage {height:300px;}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script type="application/json" id="assembly-__ASSEMBLY_ID__-data">__SCENE_DATA__</script>
+<script>
+(() => {
+  const root = document.getElementById('assembly-__ASSEMBLY_ID__');
+  const find = s => root.querySelector(s);
+  try {
+    const data = JSON.parse(document.getElementById('assembly-__ASSEMBLY_ID__-data').textContent);
+    const canvas = find('canvas'), stage = find('.stage'), labelBox = find('.labels');
+    const scene = new THREE.Scene();
+    const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, preserveDrawingBuffer:true});
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setClearColor(0,0);
+    const camera = new THREE.PerspectiveCamera(38,1,0.01,10000);
+    camera.up.set(0,0,1);
+    const group = new THREE.Group(); scene.add(group);
+    const ambient = new THREE.AmbientLight(); scene.add(ambient);
+    const sun = new THREE.DirectionalLight(); sun.position.set(18,-15,22); scene.add(sun);
+    const probe = document.createElement('span'); probe.hidden=true; root.append(probe);
+    function color(token) {probe.style.color='var('+token+')';return new THREE.Color(getComputedStyle(probe).color);}
+    function cssColor(c) {return '#'+c.getHexString();}
+    function unpack(s,Type) {const b=Uint8Array.from(atob(s),c=>c.charCodeAt(0));return new Type(b.buffer);}
+    const meshes={}, labels={}, checks={}, swatches={};
+    data.parts.forEach((p,i)=>{
+      const geo=new THREE.BufferGeometry();
+      geo.setAttribute('position',new THREE.BufferAttribute(unpack(p.vertices,Float32Array),3));
+      geo.setAttribute('normal',new THREE.BufferAttribute(unpack(p.normals,Float32Array),3));
+      geo.setIndex(new THREE.BufferAttribute(unpack(p.faces,Uint16Array),1));
+      const mesh=new THREE.Mesh(geo,new THREE.MeshPhongMaterial({side:THREE.DoubleSide,shininess:24}));
+      mesh.matrixAutoUpdate=false; group.add(mesh); meshes[p.id]=mesh;
+      const label=document.createElement('span');label.className='part-label';label.textContent=p.id;
+      labelBox.append(label);labels[p.id]=label;
+      const wrap=document.createElement('label');wrap.className='form-check';
+      const input=document.createElement('input');input.type='checkbox';input.checked=true;input.className='form-check-input';input.setAttribute('aria-label','부품 '+p.id+' 표시');
+      const span=document.createElement('span');span.className='form-check-label';
+      const swatch=document.createElement('span');swatch.className='swatch';swatch.setAttribute('aria-hidden','true');
+      span.append(swatch,document.createTextNode(' '+p.id));wrap.append(input,span);find('[data-legend]').append(wrap);
+      checks[p.id]=input;swatches[p.id]=swatch;
+      input.addEventListener('change',()=>{update();save();});
+    });
+    let yaw=-0.8,pitch=0.6,zoom=1,progress=-1,playing=false,last=0,clock=0;
+    const originalBox = new THREE.Box3(new THREE.Vector3(...data.bounds[0]),new THREE.Vector3(...data.bounds[1]));
+    let center=originalBox.getCenter(new THREE.Vector3()),size=originalBox.getSize(new THREE.Vector3()).length();
+    const count=data.steps ? data.steps.length*80 : 0;
+    const play=find('[data-play]'), status=find('[data-status]'), slider=find('[data-progress]');
+    if(count){play.hidden=false;find('[data-replay]').hidden=false;slider.max=count;}
+    function theme() {
+      data.parts.forEach((p,i)=>{
+        const c=color(i<6?'--viz-series-'+(i+1):'--muted-foreground');
+        meshes[p.id].material.color.copy(c);swatches[p.id].style.backgroundColor=cssColor(c);
+      });
+      const light=color('--background').lerp(color('--foreground'),0.5);
+      ambient.color.copy(light);ambient.intensity=2.1;sun.color.copy(light);sun.intensity=2.8;draw();
+    }
+    function cameraUpdate(){
+      const distance=size*1.65/zoom;
+      camera.position.set(center.x+distance*Math.cos(pitch)*Math.cos(yaw),center.y+distance*Math.cos(pitch)*Math.sin(yaw),center.z+distance*Math.sin(pitch));
+      camera.lookAt(center);
+    }
+    function draw(){
+      cameraUpdate();renderer.render(scene,camera);
+      const w=stage.clientWidth,h=stage.clientHeight,occupied=[];
+      data.parts.forEach(p=>{
+        const mesh=meshes[p.id],label=labels[p.id];label.hidden=!mesh.visible;
+        if(!mesh.visible)return;
+        const v=new THREE.Vector3(...p.bounds[0]).add(new THREE.Vector3(...p.bounds[1])).multiplyScalar(.5).applyMatrix4(mesh.matrixWorld).project(camera);
+        let x=(v.x+1)*w/2,y=(1-v.y)*h/2;
+        for(const q of occupied)if(Math.abs(x-q[0])<20&&Math.abs(y-q[1])<20)y=q[1]+22;
+        x=Math.max(8,Math.min(w-22,x));y=Math.max(8,Math.min(h-24,y));occupied.push([x,y]);
+        label.style.left=x+'px';label.style.top=y+'px';
+      });
+    }
+    function update(){
+      let matrices=null,step=null,stepIndex=-1;
+      if(progress>=0&&count){
+        stepIndex=Math.min(data.steps.length-1,Math.floor(progress/80));step=data.steps[stepIndex];
+        const fi=Math.min(step.frames.length-1,Math.round((progress-stepIndex*80)/79*(step.frames.length-1)));
+        matrices=step.frames[fi];
+      }
+      data.parts.forEach(p=>{
+        const mesh=meshes[p.id];
+        mesh.matrix.identity();
+        if(matrices&&matrices[p.id])mesh.matrix.set(...matrices[p.id].flat());
+        const atEnd=progress===count&&data.terminal_parts&&!data.terminal_parts.includes(p.id);
+        mesh.visible=checks[p.id].checked&&(!matrices||Boolean(matrices[p.id]))&&!atEnd;
+      });
+      // Use one assembly reference frame for the camera; no synthetic path extension.
+      if(step){
+        const pose=new THREE.Matrix4().set(...(step.pose||[[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]]).flat());
+        center=originalBox.getCenter(new THREE.Vector3()).applyMatrix4(pose);
+        if(progress===count){status.textContent='완료 · 부품 '+data.terminal_parts.join(', ')+' 남음';}
+        else status.textContent=(stepIndex+1)+' / '+data.steps.length+' 단계 · 부품 '+step.part+' 분리';
+        find('[data-detail]').textContent='실제 ASAP 경로 재생 · 지지 부품 '+(step.recorded_supports.join(', ')||'없음')+' · 단계 사이 자세 전환은 생략';
+      } else {center=originalBox.getCenter(new THREE.Vector3());status.textContent='조립 상태';find('[data-detail]').textContent=count?'순서 1 → 2 → 0 → 4 · 재생 속도는 설명용으로 조절됨':'';}
+      slider.value=Math.max(0,progress);root.dataset.frame=String(progress);draw();
+    }
+    function stop(){playing=false;play.textContent='분해 재생';}
+    function save(){if(window.openai&&window.openai.setWidgetState)window.openai.setWidgetState({modelContent:{assembly:'__ASSEMBLY_ID__',progress,visibleParts:data.parts.filter(p=>checks[p.id].checked).map(p=>p.id)},privateContent:{yaw,pitch,zoom}}).catch(()=>{});}
+    function restore(saved){
+      if(!saved||saved.modelContent?.assembly!=='__ASSEMBLY_ID__')return;
+      const m=saved.modelContent,p=saved.privateContent||{};stop();
+      if(Number.isFinite(m.progress))progress=Math.max(-1,Math.min(count,m.progress));
+      if(Array.isArray(m.visibleParts))data.parts.forEach(x=>checks[x.id].checked=m.visibleParts.includes(x.id));
+      if(Number.isFinite(p.yaw))yaw=p.yaw;if(Number.isFinite(p.pitch))pitch=p.pitch;
+      if(Number.isFinite(p.zoom))zoom=p.zoom;find('[data-zoom]').value=zoom*100;update();
+    }
+    find('[data-original]').onclick=()=>{stop();progress=-1;data.parts.forEach(p=>checks[p.id].checked=true);update();save();};
+    find('[data-angle]').onclick=()=>{yaw+=Math.PI/2;draw();save();};
+    find('[data-zoom]').oninput=e=>{zoom=Number(e.target.value)/100;draw();};
+    find('[data-zoom]').onchange=save;
+    find('[data-prev]').onclick=()=>{stop();progress=Math.max(0,(Math.floor(Math.max(0,progress)/80)-1)*80);update();save();};
+    find('[data-next]').onclick=()=>{stop();progress=Math.min(count,(Math.floor(Math.max(-1,progress)/80)+1)*80);update();save();};
+    slider.oninput=e=>{stop();progress=Number(e.target.value);update();};slider.onchange=save;
+    play.onclick=()=>{
+      if(playing){stop();save();return;}
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){progress=Math.min(count,Math.max(0,progress)+80);update();save();return;}
+      if(progress<0||progress>=count)progress=0;playing=true;last=0;clock=progress;play.textContent='일시 정지';update();requestAnimationFrame(tick);
+    };
+    function tick(t){if(!playing)return;if(last)clock+=(t-last)*.022;last=t;progress=Math.min(count,Math.floor(clock));update();if(progress>=count){stop();save();return;}requestAnimationFrame(tick);}
+    let drag=null;
+    canvas.addEventListener('pointerdown',e=>{drag=[e.clientX,e.clientY];canvas.setPointerCapture(e.pointerId);});
+    canvas.addEventListener('pointermove',e=>{if(!drag)return;yaw-=(e.clientX-drag[0])*.009;pitch=Math.max(-1.4,Math.min(1.4,pitch+(e.clientY-drag[1])*.009));drag=[e.clientX,e.clientY];draw();});
+    canvas.addEventListener('pointerup',()=>{drag=null;save();});
+    canvas.addEventListener('pointercancel',()=>{drag=null;});
+    new ResizeObserver(()=>{const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();draw();}).observe(stage);
+    new MutationObserver(theme).observe(document.documentElement,{attributes:true,attributeFilter:['class','style','data-theme']});
+    window.addEventListener('openai:set_globals',e=>{restore(e.detail?.globals?.widgetState);theme();});
+    update();theme();restore(window.openai?.widgetState);root.dataset.ready='true';
+  } catch(error){find('[data-error]').textContent='3D 표시 오류: '+error.message;root.dataset.ready='error';console.error(error);}
+})();
+</script>

@@ -1,0 +1,36 @@
+# Credentials and local environments
+.env
+.env.*
+!.env.example
+.secrets/
+*.local.env
+*.local.json
+.venv*/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+# Raw/private data and local artifacts
+runs/
+reference/
+artifacts/
+output/
+outputs/
+tmp/
+.codex*/
+.claude/
+*.sqlite*
+*.db
+*.log
+*.obj
+*.stp
+*.step
+*.stl
+*.sdf
+*.pkl
+*.pt
+*.pth
+*.zip
+*.pdf
+*.pptx
+*.mp4
+# Only explicitly reviewed historical files under runs are tracked.

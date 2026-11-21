@@ -1,0 +1,22 @@
+# 실험 기록
+
+- record status: NOT_RUN
+- run ID / timestamp / operator:
+- question and hypothesis:
+- native/selective/other goal:
+- baseline/method:
+- source commit and patch:
+- assets/hash/units/frames:
+- solver/physics/support/options/seed/budgets:
+- environment:
+- memory source split / frozen snapshot / skill code hashes:
+- LLM provider/model/settings (secrets 제외):
+- exact command / cwd:
+- raw artifact paths:
+- native success / goal success / termination:
+- calls / actual solver / cache hits / internal cost:
+- wall-clock / LLM latency / tokens / cost:
+- memory/skill retrieved-selected-invoked-result:
+- failures / unknown / errors / zero-check failures:
+- interpretation supported by this run:
+- unsupported claims / follow-up:

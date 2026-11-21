@@ -1,0 +1,45 @@
+{
+  "schema_version": "proposed-wrapper-v2",
+  "status": "EXAMPLE_REQUIRES_IMPLEMENTATION",
+  "task_id": "asap_beam_native_baseline",
+  "upstream": {
+    "repository": "https://github.com/yunshengtian/ASAP",
+    "checkout_dir": "external/ASAP",
+    "commit": null
+  },
+  "assembly": {
+    "asset_dir": "assets/beam_assembly/original",
+    "cli_dir": "beam_assembly",
+    "cli_id": "original",
+    "part_manifest": "GENERATE_FROM_FILES",
+    "unit": "UNVERIFIED",
+    "apply_extra_preprocessing": false
+  },
+  "goal": {
+    "mode": "native_asap",
+    "target_part_id": null
+  },
+  "planner": {
+    "name": "dfs",
+    "generator": "heur-out",
+    "base_part": "6",
+    "max_gripper": 2,
+    "early_term": true,
+    "seed": null,
+    "budget": null,
+    "timeout": null,
+    "unset_options_policy": "read_and_record_upstream_defaults"
+  },
+  "extension": {
+    "enabled": false,
+    "llm_enabled": false,
+    "memory_mode": "off",
+    "allow_hard_pruning": false,
+    "strategy_registry_enabled": false
+  },
+  "execution": {
+    "robot_enabled": false,
+    "isaac_sim_enabled": false,
+    "retain_native_logs": true
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "purpose": "predeclared development integration cases; not performance/generalization evaluation",
+  "experience_task": "official_beam_development",
+  "experience_report": "runs/explicit_action_v2_live_20261018/beam/planner/planner_report.json",
+  "selection_rationale": "Preserved Beam recovery supplies a known feasible debugging condition. Two separately declared opposite-axis path probes test technical scoped admission; same assembly, not independent geometries. Failures remain in the denominator. Transfer/performance tasks are not used to edit the program.",
+  "cases": [
+    {"case_id":"beam_debug_yp","phase":"debug","source_task":"beam","report":"runs/explicit_action_v2_live_20261018/beam/planner/planner_report.json","attempt_index":1,"trigger_kind":"path_failed"},
+    {"case_id":"beam_admission_yn","phase":"admission","source_task":"beam","report":"runs/explicit_action_v2_live_20261018/beam/planner/planner_report.json","attempt_index":1,"trigger_kind":"path_failed","trigger_override":{"direction_id":"yn"}},
+    {"case_id":"beam_admission_xn","phase":"admission","source_task":"beam","report":"runs/explicit_action_v2_live_20261018/beam/planner/planner_report.json","attempt_index":1,"trigger_kind":"path_failed","trigger_override":{"direction_id":"xn"}}
+  ]
+}

@@ -1,0 +1,348 @@
+{
+  "protocol": "scored_path_order_python_registration/v1",
+  "status": "REGISTERED_SCOPED",
+  "skill_id": "scored-order:68df5385c5b98f0519763365990b378699584b95e9b4b66c90d1ada1f82b9230",
+  "candidate": {
+    "protocol": "scored_path_order_candidate/v1",
+    "version": 1,
+    "description": "Prioritizes candidates that preserve the remaining contact graph: fewer newly created components and isolated remainder nodes score higher. As a tie-break, favors lower contact degree, then smaller volume fraction when available. This is a weak structural heuristic, not a learned causal predictor: observations are limited and chains with unknown outcomes are not treated as scored failures.",
+    "evidence_ids": [
+      "obs_1c6d4f7b5af05b90",
+      "obs_3c09c493ffd0a217",
+      "obs_5aa1531b10fbe47e",
+      "obs_0b4895e1f3689e02"
+    ],
+    "name": "Connectivity-preserving structural heuristic",
+    "source": "def propose(ctx):\n    delta = ctx['component_delta']\n    isolated = ctx['remainder_isolated_nodes']\n    degree = ctx['contact_degree']\n    volume = ctx['volume_fraction_if_valid']\n    if delta is None or isolated is None or degree is None:\n        return None\n    if volume is None:\n        volume = 0.0\n    return -100.0 * delta - 10.0 * isolated - degree - 0.01 * volume",
+    "source_sha256": "6c9a4dabc013cde05c27efd7a404d320e6743439493addb41bc97d461ded657f",
+    "packet_sha256": "a9349b8569d815674e76a61ea15b3aa119b6682df1e72163048c42fd1c1eb3f9",
+    "provenance": {
+      "origin": "actual_llm",
+      "model": "gpt-6-luna",
+      "request_id": "luna:ef8c046889cbf7d855926ff9e7417629bebb2c905e5ae144f6740142f4bb9d14",
+      "call_id": "5a88dfe4-ea90-4128-854b-d1536d2c3dc3",
+      "provider_response_id": "resp_04adaa083e5d8331016af4697fd6b087d2b67857d048403103",
+      "response_sha256": "59ac6490c9245ef075f2852c6f74079a3c5dc9d646ddc441e9c0d93add1757dc",
+      "revision": "scored_order_python_source_revision/v2",
+      "body_sha256": "ef8c046889cbf7d855926ff9e7417629bebb2c905e5ae144f6740142f4bb9d14"
+    },
+    "stage": "CANDIDATE",
+    "registered": false,
+    "physics_validated": false,
+    "skill_id": "scored-order:68df5385c5b98f0519763365990b378699584b95e9b4b66c90d1ada1f82b9230"
+  },
+  "training_products": [
+    "00365",
+    "00561",
+    "00675",
+    "01289",
+    "02628"
+  ],
+  "generation_ledger": "revision/ledger.sqlite",
+  "generation_artifact": "revision/candidate.json",
+  "validation_products": [
+    "00561",
+    "02628"
+  ],
+  "validation_summary": [
+    {
+      "product": "00561",
+      "domain": "path_only_sequence_proposal/v1",
+      "decision_kind": "skill",
+      "skill_id": "scored-order:68df5385c5b98f0519763365990b378699584b95e9b4b66c90d1ada1f82b9230",
+      "candidate_digest": "63a4ecff632ed3a7bf4c5491c92ed39dc91cd17f7bcea1c9ddb5f61cf79bf8de",
+      "qualifies": true,
+      "complete": true,
+      "score": [
+        4,
+        9
+      ],
+      "steps": [
+        4,
+        3,
+        1,
+        1
+      ],
+      "root_order": [
+        "3",
+        "4",
+        "5",
+        "2",
+        "0"
+      ],
+      "actual_first_attempt": "3",
+      "first_proposal_on_selected_chain": true,
+      "root_branches_tried": [
+        "3"
+      ],
+      "order": [
+        "3",
+        "2",
+        "4",
+        "5"
+      ],
+      "last": [
+        "0"
+      ],
+      "visits": 3,
+      "state_receipts": [
+        {
+          "sequence": 1,
+          "parent": [
+            "0",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "order": [
+            "3",
+            "4",
+            "5",
+            "2",
+            "0"
+          ],
+          "status": "PROPOSED",
+          "vm_executed": true,
+          "all_tied": false,
+          "new_attempted_parts": [
+            "3"
+          ]
+        },
+        {
+          "sequence": 2,
+          "parent": [
+            "0",
+            "2",
+            "4",
+            "5"
+          ],
+          "order": [
+            "2",
+            "4",
+            "5",
+            "0"
+          ],
+          "status": "PROPOSED",
+          "vm_executed": true,
+          "all_tied": false,
+          "new_attempted_parts": [
+            "2"
+          ]
+        },
+        {
+          "sequence": 3,
+          "parent": [
+            "0",
+            "4",
+            "5"
+          ],
+          "order": [
+            "4",
+            "5",
+            "0"
+          ],
+          "status": "PROPOSED",
+          "vm_executed": true,
+          "all_tied": false,
+          "new_attempted_parts": [
+            "4"
+          ]
+        }
+      ],
+      "python_executions": 3,
+      "unique_decision_states": 3,
+      "all_tied_visits": 0,
+      "abstentions": 0,
+      "path_checks": 24,
+      "stability_checks": 13,
+      "result_sha256": "34665eae9c20f141adfb40e14af239d5977e58ed176b05b747e7f89f765fcbda",
+      "root_input_sha256": "60b6b79ac0d0fdfaa1b47c49f3e82ecfb1d97ddbe82b7bcf8a843357c0cdc70c",
+      "intent_sha256": "8c7a663b65d57623c405cd2584163a59eaa8dfaa6296fff3a2a123b3e373737e",
+      "terminal": "native_mass_rule",
+      "api_calls_in_worker": 0
+    },
+    {
+      "product": "02628",
+      "domain": "path_only_sequence_proposal/v1",
+      "decision_kind": "skill",
+      "skill_id": "scored-order:68df5385c5b98f0519763365990b378699584b95e9b4b66c90d1ada1f82b9230",
+      "candidate_digest": "63a4ecff632ed3a7bf4c5491c92ed39dc91cd17f7bcea1c9ddb5f61cf79bf8de",
+      "qualifies": true,
+      "complete": true,
+      "score": [
+        6,
+        13
+      ],
+      "steps": [
+        6,
+        0,
+        2,
+        2,
+        2,
+        1
+      ],
+      "root_order": [
+        "5",
+        "6",
+        "1",
+        "2",
+        "3",
+        "4",
+        "0"
+      ],
+      "actual_first_attempt": "5",
+      "first_proposal_on_selected_chain": true,
+      "root_branches_tried": [
+        "5"
+      ],
+      "order": [
+        "5",
+        "6",
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "last": [
+        "0"
+      ],
+      "visits": 5,
+      "state_receipts": [
+        {
+          "sequence": 1,
+          "parent": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "order": [
+            "5",
+            "6",
+            "1",
+            "2",
+            "3",
+            "4",
+            "0"
+          ],
+          "status": "PROPOSED",
+          "vm_executed": true,
+          "all_tied": false,
+          "new_attempted_parts": [
+            "5"
+          ]
+        },
+        {
+          "sequence": 2,
+          "parent": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "6"
+          ],
+          "order": [
+            "6",
+            "1",
+            "2",
+            "3",
+            "4",
+            "0"
+          ],
+          "status": "PROPOSED",
+          "vm_executed": true,
+          "all_tied": false,
+          "new_attempted_parts": [
+            "6"
+          ]
+        },
+        {
+          "sequence": 3,
+          "parent": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "order": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "0"
+          ],
+          "status": "PROPOSED",
+          "vm_executed": true,
+          "all_tied": false,
+          "new_attempted_parts": [
+            "1"
+          ]
+        },
+        {
+          "sequence": 4,
+          "parent": [
+            "0",
+            "2",
+            "3",
+            "4"
+          ],
+          "order": [
+            "2",
+            "3",
+            "4",
+            "0"
+          ],
+          "status": "PROPOSED",
+          "vm_executed": true,
+          "all_tied": false,
+          "new_attempted_parts": [
+            "2"
+          ]
+        },
+        {
+          "sequence": 5,
+          "parent": [
+            "0",
+            "3",
+            "4"
+          ],
+          "order": [
+            "3",
+            "4",
+            "0"
+          ],
+          "status": "PROPOSED",
+          "vm_executed": true,
+          "all_tied": false,
+          "new_attempted_parts": [
+            "3"
+          ]
+        }
+      ],
+      "python_executions": 5,
+      "unique_decision_states": 5,
+      "all_tied_visits": 0,
+      "abstentions": 0,
+      "path_checks": 36,
+      "stability_checks": 15,
+      "result_sha256": "4707178d2217f8db8f4fe6394ab4bd1c71a947bac5d16b1e401bdccf895655fb",
+      "root_input_sha256": "535f4c26ea2c4b01a974fe782005382d55cf8904e09c49b6fa67ad7e384a3380",
+      "intent_sha256": "662ce6ac309a0b18a126683b74b1b96f6670bac50941a6f9370dc58c422e0a62",
+      "terminal": "native_mass_rule",
+      "api_calls_in_worker": 0
+    }
+  ],
+  "product_scope": [
+    "00561",
+    "02628"
+  ],
+  "transfer_validated": false,
+  "performance_effect": "UNVERIFIED",
+  "scope": "complete skill permutations and witnessed RedMax path/auto-support on two training assemblies using all visited nonterminal states; no robot execution"
+}

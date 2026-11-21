@@ -1,0 +1,348 @@
+{
+  "protocol": "scored_path_order_python_registration/v1",
+  "status": "REGISTERED_SCOPED",
+  "skill_id": "scored-order:50e11c512b350c3a01889dc5e4bb770ad93011c2d7ac3d2f426b33bffd87edce",
+  "candidate": {
+    "protocol": "scored_path_order_candidate/v1",
+    "version": 1,
+    "description": "Ranks compact, peripheral parts higher using extent ratio times center distance, discounted by volume share; mildly penalizes fragmentation and isolated remainders. Motivated by same-state B chains where side-part-first runs had lower peak holds than the thin-part-first run. This does not establish first-choice causality or improvement elsewhere; real physics validation is required.",
+    "evidence_ids": [
+      "obs_d5db398b00943717",
+      "obs_5aa1531b10fbe47e",
+      "obs_9058a7addc555580"
+    ],
+    "name": "Compact peripheral removal with fragmentation discount",
+    "source": "def propose(ctx):\n    shape = ctx.get(\"shortest_over_longest_extent\")\n    distance = ctx.get(\"distance_from_center_over_diagonal\")\n    volume = ctx.get(\"volume_fraction_if_valid\")\n    if shape is None:\n        shape = 0.5\n    if distance is None:\n        distance = 0.0\n    if volume is None:\n        volume = 0.0\n    shape = min(1.0, max(0.0, shape))\n    distance = min(1.0, max(0.0, distance))\n    volume = min(1.0, max(0.0, volume))\n    geometry = shape * distance / (1.0 + volume)\n    fragmentation = max(0, ctx[\"component_delta\"])\n    isolation = ctx[\"remainder_isolated_nodes\"] / max(1, ctx[\"parent_count\"] - 1)\n    return round(geometry - 0.1 * fragmentation - 0.1 * isolation, 6)",
+    "source_sha256": "999d05471052a49570bc230f2541b063f45887e2fb294920f5b3fed7ffdfffd2",
+    "packet_sha256": "a9349b8569d815674e76a61ea15b3aa119b6682df1e72163048c42fd1c1eb3f9",
+    "provenance": {
+      "origin": "actual_llm",
+      "model": "gpt-6-astra",
+      "request_id": "astra:c49ffd936cc9c77772cc7a4cc5437c2034f812c19ffe0e34c024bf71c4c296ba",
+      "call_id": "509404af-13f3-4d0f-b7d2-4b2a7a346486",
+      "provider_response_id": "resp_0c1ee361d3784d51016af48c6d899c87d28defad950b4f0d0f",
+      "response_sha256": "5aa720d8fc6b45e48ae1f841bf127c733fed3ce36d7cf7281069613efe6c6d11",
+      "revision": "scored_order_astra_author/v1",
+      "body_sha256": "c49ffd936cc9c77772cc7a4cc5437c2034f812c19ffe0e34c024bf71c4c296ba"
+    },
+    "stage": "CANDIDATE",
+    "registered": false,
+    "physics_validated": false,
+    "skill_id": "scored-order:50e11c512b350c3a01889dc5e4bb770ad93011c2d7ac3d2f426b33bffd87edce"
+  },
+  "training_products": [
+    "00365",
+    "00561",
+    "00675",
+    "01289",
+    "02628"
+  ],
+  "generation_ledger": "generation/ledger.sqlite",
+  "generation_artifact": "generation/candidate.json",
+  "validation_products": [
+    "00561",
+    "02628"
+  ],
+  "validation_summary": [
+    {
+      "product": "00561",
+      "domain": "path_only_sequence_proposal/v1",
+      "decision_kind": "skill",
+      "skill_id": "scored-order:50e11c512b350c3a01889dc5e4bb770ad93011c2d7ac3d2f426b33bffd87edce",
+      "candidate_digest": "98c841c11ca215085e8c6539d972af08a752f497058311a59f00e778f196408d",
+      "qualifies": true,
+      "complete": true,
+      "score": [
+        4,
+        10
+      ],
+      "steps": [
+        4,
+        3,
+        2,
+        1
+      ],
+      "root_order": [
+        "5",
+        "4",
+        "3",
+        "2",
+        "0"
+      ],
+      "actual_first_attempt": "5",
+      "first_proposal_on_selected_chain": true,
+      "root_branches_tried": [
+        "5"
+      ],
+      "order": [
+        "5",
+        "4",
+        "3",
+        "2"
+      ],
+      "last": [
+        "0"
+      ],
+      "visits": 3,
+      "state_receipts": [
+        {
+          "sequence": 1,
+          "parent": [
+            "0",
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "order": [
+            "5",
+            "4",
+            "3",
+            "2",
+            "0"
+          ],
+          "status": "PROPOSED",
+          "vm_executed": true,
+          "all_tied": false,
+          "new_attempted_parts": [
+            "5"
+          ]
+        },
+        {
+          "sequence": 2,
+          "parent": [
+            "0",
+            "2",
+            "3",
+            "4"
+          ],
+          "order": [
+            "4",
+            "3",
+            "0",
+            "2"
+          ],
+          "status": "PROPOSED",
+          "vm_executed": true,
+          "all_tied": false,
+          "new_attempted_parts": [
+            "4"
+          ]
+        },
+        {
+          "sequence": 3,
+          "parent": [
+            "0",
+            "2",
+            "3"
+          ],
+          "order": [
+            "3",
+            "0",
+            "2"
+          ],
+          "status": "PROPOSED",
+          "vm_executed": true,
+          "all_tied": false,
+          "new_attempted_parts": [
+            "3"
+          ]
+        }
+      ],
+      "python_executions": 3,
+      "unique_decision_states": 3,
+      "all_tied_visits": 0,
+      "abstentions": 0,
+      "path_checks": 24,
+      "stability_checks": 14,
+      "result_sha256": "b78e99091650f817229c2ac122f9d230c44cd425ff6ab35c08055d18c487be52",
+      "root_input_sha256": "60b6b79ac0d0fdfaa1b47c49f3e82ecfb1d97ddbe82b7bcf8a843357c0cdc70c",
+      "intent_sha256": "5c843aca1a74baf3eb1d80f787f5614032f9e0be9466c8ec03722bb10aa3bebb",
+      "terminal": "native_mass_rule",
+      "api_calls_in_worker": 0
+    },
+    {
+      "product": "02628",
+      "domain": "path_only_sequence_proposal/v1",
+      "decision_kind": "skill",
+      "skill_id": "scored-order:50e11c512b350c3a01889dc5e4bb770ad93011c2d7ac3d2f426b33bffd87edce",
+      "candidate_digest": "98c841c11ca215085e8c6539d972af08a752f497058311a59f00e778f196408d",
+      "qualifies": true,
+      "complete": true,
+      "score": [
+        4,
+        11
+      ],
+      "steps": [
+        4,
+        3,
+        3,
+        0,
+        0,
+        1
+      ],
+      "root_order": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "0"
+      ],
+      "actual_first_attempt": "1",
+      "first_proposal_on_selected_chain": true,
+      "root_branches_tried": [
+        "1"
+      ],
+      "order": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "last": [
+        "0"
+      ],
+      "visits": 5,
+      "state_receipts": [
+        {
+          "sequence": 1,
+          "parent": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "order": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "0"
+          ],
+          "status": "PROPOSED",
+          "vm_executed": true,
+          "all_tied": false,
+          "new_attempted_parts": [
+            "1"
+          ]
+        },
+        {
+          "sequence": 2,
+          "parent": [
+            "0",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "order": [
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "0"
+          ],
+          "status": "PROPOSED",
+          "vm_executed": true,
+          "all_tied": false,
+          "new_attempted_parts": [
+            "2"
+          ]
+        },
+        {
+          "sequence": 3,
+          "parent": [
+            "0",
+            "3",
+            "4",
+            "5",
+            "6"
+          ],
+          "order": [
+            "3",
+            "4",
+            "5",
+            "6",
+            "0"
+          ],
+          "status": "PROPOSED",
+          "vm_executed": true,
+          "all_tied": false,
+          "new_attempted_parts": [
+            "3"
+          ]
+        },
+        {
+          "sequence": 4,
+          "parent": [
+            "0",
+            "4",
+            "5",
+            "6"
+          ],
+          "order": [
+            "4",
+            "5",
+            "6",
+            "0"
+          ],
+          "status": "PROPOSED",
+          "vm_executed": true,
+          "all_tied": false,
+          "new_attempted_parts": [
+            "4"
+          ]
+        },
+        {
+          "sequence": 5,
+          "parent": [
+            "0",
+            "5",
+            "6"
+          ],
+          "order": [
+            "5",
+            "6",
+            "0"
+          ],
+          "status": "PROPOSED",
+          "vm_executed": true,
+          "all_tied": false,
+          "new_attempted_parts": [
+            "5"
+          ]
+        }
+      ],
+      "python_executions": 5,
+      "unique_decision_states": 5,
+      "all_tied_visits": 0,
+      "abstentions": 0,
+      "path_checks": 36,
+      "stability_checks": 14,
+      "result_sha256": "3e5509eec5ed8999889914f22ac2f9d405546b438f69adca610f33abab879cfb",
+      "root_input_sha256": "535f4c26ea2c4b01a974fe782005382d55cf8904e09c49b6fa67ad7e384a3380",
+      "intent_sha256": "2e084c970fd76e323b0ec3f1d29a98da4d185644e176010c309ee7e3ca115f7d",
+      "terminal": "native_mass_rule",
+      "api_calls_in_worker": 0
+    }
+  ],
+  "product_scope": [
+    "00561",
+    "02628"
+  ],
+  "transfer_validated": false,
+  "performance_effect": "UNVERIFIED",
+  "scope": "complete skill permutations and witnessed RedMax path/auto-support on two training assemblies using all visited nonterminal states; no robot execution",
+  "generation_run": "scored_order_astra_author_20261112"
+}

@@ -1,0 +1,7 @@
+{
+  "product": "Lab/Motor68",
+  "fixed_frame": "48",
+  "moving_grippers": 1,
+  "extra_supported_parts": 0,
+  "asap_max_grippers": 2
+}
