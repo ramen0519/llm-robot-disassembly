@@ -47,6 +47,10 @@ F의 main 스냅샷은 034006a7bc0de91cf6370eff0c07e6796f6e2877이었고 미커�
 
 최종 새 계약 **26개**, 이전 공개판의 휴대 가능 회귀 **39개**가 통과했다. 후자는 전체 과거 테스트 모음의 부분집합이다. 새 기본 실행기는 과거 C 전용 경로를 호출하지 않는다. 과거 모든 프로필의 F 이식이나 기존 공개본의 10개 경로 제한 오류 해소를 이번 결과로 주장하지 않는다. [새 테스트](../evidence/contract_tests_release.txt) · [기존 회귀](../evidence/legacy_regression.txt) · [산출물·영상·좌표 검증](../evidence/release_verification.json).
 
+## 커밋 고정 후 재현
+
+구현 커밋 `7c867386946e3fce64181626775e0fb82d67ecd9`에서 Windows 기본 실행기로 Beam 4/4를 다시 확인했고, 같은 소스로 트레이의 수집 및 후속 조회 두 회차도 재현했다. 회차마다 소스·설정 15개 파일의 SHA-256을 실제 Git 객체와 대조했다. 세 ZIP은 압축 내부 237개 파일까지 해시가 일치했다. Beam 자세 계산에서 trimesh의 제곱근 수치 경고가 출력됐고 실제 채택 경로 4개와 물리 근거 4세트가 생성됐다. [커밋·세 실행·소스 해시 검증](../evidence/postcommit_verification.json) · [최종 Windows 실행 결과](../evidence/committed_beam/result.json) · [동일 소스로 재현한 두 회차 기록](../evidence/committed_case_pair/verification.json)
+
 ## 실패와 미실행 기록
 
 - 첫 STEP 읽기는 CAD 보조 객체에 삼각형이 없어 중단됐다. 원본을 유지하고 면 없는 발생 항목과 실제 형상을 구분해 재실행했다. [최초 오류](../evidence/battery_step_01/error.json).
