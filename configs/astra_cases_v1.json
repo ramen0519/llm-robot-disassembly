@@ -1,0 +1,7 @@
+{
+  "schema":"astra-native-cases/1","model":"gpt-6-astra","endpoint":"https://api.openai.com/v1/responses",
+  "input_usd_per_million":"10","output_usd_per_million":"50","max_output_tokens":1024,
+  "reasoning_effort":"low","response_timeout_seconds":60,"max_request_context_tokens":60000,
+  "image_reserve_tokens_each":4096,"network_automatic_retries":0,
+  "price_basis":"Project's observed Astra configuration 00709, estimated program cost only"
+}

@@ -1,8 +1,19 @@
-"""Opt-in order-only LLM/fixture with unchanged native ASAP lower-level search.
+"""Run the Astra case-based disassembly planner, or the legacy --run-dir experiment.
 
-No credentials are read in fixture/prepare mode. Existing runs are never reused.
-Live mode needs --allow-live-api and a separately authorized enabled config.
+The default profile requires explicit positive request and cost limits for live generation.
+Fixture and prepare modes do not read credentials. Each invocation uses a new run folder.
 """
+# Legacy commands have an explicit --run-dir. The normal CLI now uses the master-design profile.
+import sys
+if __name__ == '__main__' and not any(a == '--run-dir' or a.startswith('--run-dir=') for a in sys.argv[1:]):
+    import os
+    if os.name=='nt':
+        from astra_cases_windows import main as windows_design_main
+        sys.argv=[sys.argv[0],'--']+sys.argv[1:]
+        raise SystemExit(windows_design_main())
+    from run_disassembly import main as design_main
+    raise SystemExit(design_main())
+
 import argparse
 from contextlib import nullcontext
 from concurrent.futures import ThreadPoolExecutor

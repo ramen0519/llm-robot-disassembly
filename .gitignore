@@ -33,4 +33,7 @@ tmp/
 *.pdf
 *.pptx
 *.mp4
+.runtime/
+.cases/
+evidence/
 # Only explicitly reviewed historical files under runs are tracked.
