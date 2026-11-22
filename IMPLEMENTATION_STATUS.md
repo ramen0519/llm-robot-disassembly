@@ -1,5 +1,19 @@
 # 구현 상태
 
+## 2026-11-22 · 기본 실행 경로와 과거 기억 분리 점검
+
+기본 실행기 `--run`의 `caseplanner` 경로, `--run-dir` 호환 경로, 현재 SQLite DB와 이전 동결 JSON 원문을 대조했다. 새 프로필에서 예전 순서 스킬을 자동으로 읽거나 실행하는 연결은 없다.
+
+| 읽기 전용으로 확인한 자료 | 실측 |
+|---|---|
+| 운영 `.cases/index.sqlite` | `research`, 사례 0건 |
+| 마지막 커밋 고정 두 회차의 모의 시험 DB | `offline_contract`, 사례 2건. 지침 작성·인용은 모의 응답 |
+| 이전 `migration_v6/training_runtime_library.json` | 704개 카드. 경험 642·교훈 52·스킬 10. 그중 범위가 정해진 등록 Python 스킬 원문 2개 확인 |
+
+검사에 사용한 SQL은 `SELECT name FROM library_domain WHERE singleton=1`, `SELECT COUNT(*) FROM cases`다. 과거 JSON은 `cards[].kind`로 집계했다. WSL ASAP 환경에서 `python -B -m unittest discover -s tests -p test_astra_cases_v1.py -v`를 실행해 26건이 통과했다. 운영 저장소에서 모의 DB를 거부하는 경우와 동결 뒤 추가된 사례를 제외하는 경우가 포함된다. 현재·과거 안내의 로컬 링크 22개와 과거 안내 본문의 보존을 확인했다.
+
+[현재 사용 안내](README.md), [당시 사용 안내](docs/history/README_20261121.md), AGENTS.md, 변경 기록, 결정 로그를 갱신했다. 이번 점검에서 실행 코드·DB·기존 실험 자료 변경, 유료 호출, 새 물리 실험은 0건이다.
+
 ## 2026-11-22 · T0–T5 연결 및 최종 검증
 
 상태와 실행 명령, 모델·입력·해시, 주요 함수, 파일별 변경, 실패와 미실행 내역을 [최종 보고서](reports/MASTER_DESIGN_DELIVERY_20261122.md)에 정리했다. [실행 설명서](docs/ASTRA_CASES_V1.md)에서 같은 기본 실행기로 재현할 수 있다.
