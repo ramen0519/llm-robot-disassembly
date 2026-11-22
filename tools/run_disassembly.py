@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
+from caseplanner import CASE_COLLECTION
 from caseplanner.io import location, read, write
 
 
@@ -19,7 +20,8 @@ def parser():
     p.add_argument('--base')
     p.add_argument('--mode',choices=['astra','fixture','prepare'],default='astra')
     p.add_argument('--asap-root',default='/opt/asap-research/ASAP')
-    p.add_argument('--store',default=str(ROOT/'.cases'))
+    p.add_argument('--store', default=str(ROOT / '.cases' / CASE_COLLECTION),
+                   help='Case database for the current collection; defaults to the fresh research store.')
     p.add_argument('--vision',default=str(ROOT/'.runtime/vision'))
     p.add_argument('--config',default=str(ROOT/'configs/astra_cases_v1.json'))
     p.add_argument('--exclude-family',action='append',default=[])
@@ -74,9 +76,9 @@ def main(argv=None, *, test_transport=None):
             args.store=args.store/'offline_provider_test_only'
         library=Library(args.store,excluded,not args.memory_off,args.frozen_index,
                         domain='offline_contract' if test_transport is not None else 'research')
-        write(args.run/'frozen_index.json',dict(index=library.index,case_ids=[c['id'] for c in library.frozen],
-            records=[dict(id=c['id'],source_run=c['run_id'],family=c['family'],bundle_sha256=c['bundle_sha256']) for c in library.frozen],
-            exclude_families=sorted(excluded),evaluation=args.evaluation,memory_off=args.memory_off))
+        snapshot = library.snapshot()
+        snapshot.update(exclude_families=sorted(excluded), evaluation=args.evaluation, memory_off=args.memory_off)
+        write(args.run/'frozen_index.json', snapshot)
     start=time.monotonic()
     write(args.run/'settings.json',{k:str(v) if isinstance(v,Path) else v for k,v in vars(args).items()})
     phase='input'

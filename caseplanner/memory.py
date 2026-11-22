@@ -3,9 +3,11 @@ import json
 import shutil
 import sqlite3
 import sys
+from contextlib import closing
 from pathlib import Path
 import numpy as np
 from PIL import Image
+from . import CASE_COLLECTION
 from .images import CAMERA
 from .io import digest, location, read, sha, write
 
@@ -129,30 +131,50 @@ class Library:
         self.domain=domain
         self.root=location(root)
         self.root.mkdir(parents=True,exist_ok=True)
-        with sqlite3.connect(str(self.root/'index.sqlite')) as db:
-            db.execute('CREATE TABLE IF NOT EXISTS cases (id TEXT PRIMARY KEY, family TEXT NOT NULL, data TEXT NOT NULL)')
-            db.execute('CREATE TABLE IF NOT EXISTS library_domain (singleton INTEGER PRIMARY KEY CHECK(singleton=1), name TEXT NOT NULL)')
-            identity=db.execute('SELECT name FROM library_domain WHERE singleton=1').fetchone()
-            if identity is None:
-                prior=db.execute('SELECT COUNT(*) FROM cases').fetchone()[0]
-                if prior: raise ValueError('existing case library has no verified provider domain')
-                db.execute('INSERT OR IGNORE INTO library_domain VALUES (1,?)',(domain,))
-                identity=db.execute('SELECT name FROM library_domain WHERE singleton=1').fetchone()
-            if identity[0]!=domain: raise ValueError('test and research memories cannot mix')
-            rows=db.execute('SELECT family,data FROM cases ORDER BY id').fetchall() if enabled else []
+        database = location(self.root / 'index.sqlite')
+        with closing(sqlite3.connect(str(database), timeout=30)) as db, db:
+            # The transaction also serializes two first runs creating the same empty store.
+            db.execute('BEGIN IMMEDIATE')
+            if not db.execute("SELECT 1 FROM sqlite_master WHERE type='table' LIMIT 1").fetchone():
+                db.execute('CREATE TABLE cases (id TEXT PRIMARY KEY, family TEXT NOT NULL, data TEXT NOT NULL)')
+                db.execute('CREATE TABLE library_domain (singleton INTEGER PRIMARY KEY CHECK(singleton=1), '
+                           'name TEXT NOT NULL, collection TEXT NOT NULL)')
+                db.execute('INSERT INTO library_domain VALUES (1, ?, ?)', (domain, CASE_COLLECTION))
+            columns = {row[1] for row in db.execute('PRAGMA table_info(library_domain)')}
+            if 'collection' not in columns:
+                raise ValueError('previous case collection: use the new default or a fresh --store directory')
+            identity = db.execute('SELECT name, collection FROM library_domain WHERE singleton=1').fetchone()
+            if identity is None or identity[1] != CASE_COLLECTION:
+                raise ValueError('case collection does not match this research run')
+            if identity[0] != domain:
+                raise ValueError('test and research memories cannot mix')
+            rows = db.execute('SELECT family, data FROM cases ORDER BY id').fetchall() if enabled else []
         self.frozen=[json.loads(data) for family,data in rows if family not in excluded]
         if frozen_file is not None:
             snapshot=read(frozen_file)
+            if snapshot.get('collection') != CASE_COLLECTION or snapshot.get('domain') != domain:
+                raise ValueError('pinned case index belongs to another collection or domain')
             records=snapshot['records']
             pairs=[[c['id'],c['bundle_sha256']] for c in records]
-            if digest(pairs)!=snapshot['index'] or len({c[0] for c in pairs})!=len(pairs):
+            ids = [cid for cid, _ in pairs]
+            if (self._index_digest(pairs) != snapshot['index'] or snapshot.get('case_ids') != ids
+                    or len(set(ids)) != len(ids)):
                 raise ValueError('invalid pinned case index')
             if enabled:
                 available={c['id']:c for c in self.frozen}
                 if any(cid not in available or available[cid]['bundle_sha256']!=h for cid,h in pairs):
                     raise ValueError('pinned case missing/excluded/changed')
                 self.frozen=[available[cid] for cid,h in pairs]
-        self.index=digest([[c['id'],c['bundle_sha256']] for c in self.frozen])
+        self.index = self._index_digest([[c['id'], c['bundle_sha256']] for c in self.frozen])
+
+    def _index_digest(self, pairs):
+        return digest({'collection': CASE_COLLECTION, 'domain': self.domain, 'records': pairs})
+
+    def snapshot(self):
+        records = [dict(id=c['id'], source_run=c['run_id'], family=c['family'], bundle_sha256=c['bundle_sha256'])
+                   for c in self.frozen]
+        return dict(collection=CASE_COLLECTION, domain=self.domain, index=self.index,
+                    case_ids=[c['id'] for c in records], records=records)
 
     def register(self,event,guide,facts,family,run,embedding):
         if event['state']!='resolved' or not verified(event['chain'],event['node'],event['target']):
@@ -169,7 +191,7 @@ class Library:
         cid=event['id']
         obs=event['representative']
         bundle=dict(event=event,guidance=guide,facts=facts,source_run=event['run_id'],source_dir=str(run),
-                    family=family,embedding=embedding,domain=self.domain)
+                    family=family,embedding=embedding,domain=self.domain,collection=CASE_COLLECTION)
         refs=set(event.get('failed_check_refs',[]))
         for step in event['chain']:
             refs.update(step.get('check_evidence',[]))
@@ -177,7 +199,7 @@ class Library:
         for key in ('physics.json','settings.json','input/geometry.json','input/part_mapping.json'):
             if (run/key).exists(): refs.add(key)
         bundle['raw_artifacts']={p:sha(run/p) for p in sorted(refs)}
-        manifest=dict(id=cid,family=family,run_id=event['run_id'],stage=obs['stage'],outcome=obs['outcome'],
+        manifest=dict(id=cid,collection=CASE_COLLECTION,family=family,run_id=event['run_id'],stage=obs['stage'],outcome=obs['outcome'],
                       guidance=guide,bundle_sha256=digest(bundle),embedding=embedding)
         with sqlite3.connect(str(self.root/'index.sqlite'),timeout=30) as db:
             db.execute('BEGIN IMMEDIATE')

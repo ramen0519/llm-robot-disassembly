@@ -6,7 +6,7 @@ Preserve official ASAP and previous results. Use a new run directory for any exp
 
 Paid API requests and long physics experiments require explicit scope, model, call/cost/time caps and user authorization. Existing historical budgets do not authorize new runs. Offline tests must not silently call a provider or load stored keys.
 
-The current CLI uses --run and the caseplanner package. Astra ranks valid parts; native ASAP retains DFS, pose/direction/support search and final-pair policy. The default research store is .cases/. Offline provider tests use a separate library. The --run-dir launcher and the prior experience, lesson and Python skill libraries are retained for historical runs. See docs/ASTRA_CASES_V1.md for the current profile and docs/history/README_20261121.md for the earlier one.
+The current CLI uses --run and the caseplanner package. Astra ranks valid parts; native ASAP retains DFS, pose/direction/support search and final-pair policy. The default research store is .cases/astra_20261122_clean/. Start this collection with zero previous cases. Database and frozen-index collection identifiers separate pre-reset material from new research. Offline provider tests use a separate library. The --run-dir launcher and the prior experience, lesson and Python skill libraries are retained for historical runs. See docs/ASTRA_CASES_V1.md for the current profile and docs/history/README_20261121.md for the earlier one.
 
 The current planner exports the verified part-level chain and a reversed assembly candidate in export_v1.json. Robot grasp, motion, and physical execution remain later work.
 

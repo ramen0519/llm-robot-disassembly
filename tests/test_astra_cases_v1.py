@@ -108,19 +108,58 @@ class Search(unittest.TestCase):
     def test_invalid_frozen_snapshot_is_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp)
-            write(root/'bad.json',dict(index='fake',records=[]))
+            store = Library(root/'store')
+            write(root/'bad.json',dict(store.snapshot(), index='fake'))
             with self.assertRaises(ValueError):Library(root/'store',frozen_file=root/'bad.json')
 
-    def test_snapshot_excludes_cases_added_between_evaluations(self):
+    def test_pre_reset_database_is_rejected_with_bytes_preserved(self):
+        import sqlite3
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            database = root/'index.sqlite'
+            db = sqlite3.connect(str(database))
+            try:
+                db.execute('CREATE TABLE library_domain (singleton INTEGER PRIMARY KEY, name TEXT)')
+                db.execute("INSERT INTO library_domain VALUES (1, 'research')")
+                db.execute('CREATE TABLE cases (id TEXT PRIMARY KEY, family TEXT, data TEXT)')
+                db.execute("INSERT INTO cases VALUES ('past', 'old-product', '{}')")
+                db.commit()
+            finally:
+                db.close()
+            before = sha(database)
+            with self.assertRaisesRegex(ValueError, 'previous case collection'):
+                CaseLibrary(root)
+            self.assertEqual(sha(database), before)
+
+    def test_previous_frozen_index_is_rejected_even_when_empty(self):
         from caseplanner.io import digest
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            pin = root/'old.json'
+            write(pin, dict(index=digest([]), case_ids=[], records=[]))
+            with self.assertRaisesRegex(ValueError, 'another collection'):
+                CaseLibrary(root/'new', frozen_file=pin)
+            self.assertEqual(CaseLibrary(root/'new').frozen, [])
+
+    def test_current_fixture_snapshot_cannot_be_used_for_research(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            fixture = Library(root/'fixture')
+            research = CaseLibrary(root/'research')
+            self.assertNotEqual(fixture.index, research.index)
+            write(root/'fixture.json', fixture.snapshot())
+            with self.assertRaisesRegex(ValueError, 'another collection or domain'):
+                CaseLibrary(root/'research', frozen_file=root/'fixture.json')
+
+    def test_snapshot_excludes_cases_added_between_evaluations(self):
         with tempfile.TemporaryDirectory() as tmp:
             root=Path(tmp)
             inc=Incidents('sample','geometry-v1')
             event=inc.failed('0','T',dict(O),[])
             inc.accepted([A,B])
             store=Library(root/'store')
+            write(root/'before.json',store.snapshot())
             cid=store.register(event,G,{'f':1},'family',root,None)
-            write(root/'before.json',dict(index=digest([]),records=[]))
             self.assertEqual(Library(root/'store',frozen_file=root/'before.json').frozen,[])
             self.assertEqual(Library(root/'store').frozen[0]['id'],cid)
 
